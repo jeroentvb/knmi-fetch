@@ -63,3 +63,4 @@ typings/
 # project specific
 .DS_Store
 *-export.json
+dist/

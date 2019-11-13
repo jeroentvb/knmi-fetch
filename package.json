@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "start": "node ./dist/index.js"
+    "start": "node ./dist/index.js",
+    "test": "node test/test.js"
   },
   "repository": {
     "type": "git",
@@ -19,12 +20,12 @@
   },
   "homepage": "https://github.com/jeroentvb/knmi-fetch#readme",
   "dependencies": {
-    "jeroentvb-helper": "github:jeroentvb/jeroentvb-helper",
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {
     "@types/node": "^12.12.6",
     "@types/node-fetch": "^2.5.3",
+    "jeroentvb-helper": "github:jeroentvb/jeroentvb-helper",
     "typescript": "^3.7.2"
   }
 }

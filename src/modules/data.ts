@@ -1,3 +1,5 @@
+import { dataObj } from '../interfaces'
+
 const keys = [
   'STN',
   'YYYYMMDD',
@@ -12,21 +14,32 @@ const keys = [
   'FXXH'
 ]
 
-export function parse (data: string) {
+export default function (data: string): dataObj[] {
   return data
+  // Split string at newline characters
   .split('\n')
-  .filter((row, i) => i > 19)
-  .map(row => row.split(',')
-  .map(item => item.trim()))
-  .map(date => {
-    const obj: {
-      [key: string]: string
-    } = {}
-
-    date.forEach((item: string, i: number) => {
-      obj[keys[i]] = item
-    })
-
-    return obj
+  // Remove all comments from the data
+  .filter((row: string) => !row.includes('#'))
+  // Create an array from the data string and remove spaces
+  .map((row: string) => {
+    return row
+      .split(',')
+      .map((item: string) => item.trim())
+  })
+  // Return the array of values as a usable object
+  .map((value: string[]) => {
+    return {
+      STN: value[0],
+      YYYYMMDDD: value[1],
+      DDVEC: value[2],
+      FHVEC: value[3],
+      F6: value[4],
+      FHX: value[5],
+      FHXH: value[6],
+      FHN: value[7],
+      FHNH: value[8],
+      FXX: value[9],
+      FXXH:value[10]
+    }
   })
 }

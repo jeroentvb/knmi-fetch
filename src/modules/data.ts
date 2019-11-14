@@ -14,7 +14,7 @@ const keys = [
   'FXXH'
 ]
 
-export default function (data: string): dataObj[] {
+function days (data: string): dataObj[] {
   return data
   // Split string at newline characters
   .split('\n')
@@ -42,4 +42,8 @@ export default function (data: string): dataObj[] {
       FXXH:value[10]
     }
   })
+}
+
+export default {
+  days
 }

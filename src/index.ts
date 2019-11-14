@@ -5,7 +5,7 @@ import { dataObj } from './interfaces'
 
 const url: RequestInfo = 'http://projects.knmi.nl/klimatologie/daggegevens/getdata_dag.cgi'
 
-export async function get (stationCode: string | number): Promise<dataObj[] | Error> {
+export async function get (stationCode: string | number): Promise<dataObj[]> {
   const options: RequestInit = {
     method: 'POST',
     headers: {

@@ -1,7 +1,7 @@
 const knmi = require('../dist/index')
 const helper = require('jeroentvb-helper')
 
-knmi.days(process.argv[2] || 249)
+knmi.days(process.argv[2] || 249, 'ALL')
   .then(res => {
     helper.exportToFile('data', res)
     // console.log(res)

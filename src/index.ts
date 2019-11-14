@@ -1,27 +1,38 @@
-import fetch, { RequestInit, RequestInfo } from 'node-fetch'
+import fetch, { RequestInit } from 'node-fetch'
 import parse from './modules/data'
+import helper from './modules/helper'
+import queryString from './modules/query-string'
 
-import { dataObj } from './interfaces'
+import { DailyVars } from './types'
 
-const url: RequestInfo = 'http://projects.knmi.nl/klimatologie/daggegevens/getdata_dag.cgi'
-
-export async function days (stationCode: string | number): Promise<dataObj[]> {
+export async function days (stationCode: string | number, vars?: DailyVars): Promise<{ [key: string]: string }[]> {
   const options: RequestInit = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
-    body: `stns=${stationCode}&vars=DDVEC:FG:FHX:FHX:FX&byear=2018&bmonth=1&bday=1&eyear=2019&emonth=8&eday=18`
+    body: queryString.days(stationCode, vars)
+  }
+
+  if (vars) {
+    const err = helper.checkVars.days(vars)
+    if (err) throw err
   }
 
   try {
-    const res = await fetch(url, options)
+    const res = await fetch(helper.url(), options)
     const data = await res.text()
+
+    const fs = require('fs')
+    fs.writeFile('data-export.txt', data, (err: any) => {
+      if (err) throw err
+    })
+
     const parsedData = parse.days(data)
 
-    if (parsedData[0].STN != stationCode) {
-      throw new Error('Station doesn\'t exist')
-    }
+    // if (parsedData[0].STN != stationCode) {
+    //   throw new Error('Station doesn\'t exist')
+    // }
 
     return parsedData
   } catch (err) {

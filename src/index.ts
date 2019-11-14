@@ -30,9 +30,9 @@ export async function days (stationCode: string | number, vars?: DailyVars): Pro
 
     const parsedData = parse.days(data)
 
-    // if (parsedData[0].STN != stationCode) {
-    //   throw new Error('Station doesn\'t exist')
-    // }
+    if (parsedData[0].STN != stationCode) {
+      throw new Error('Station doesn\'t exist')
+    }
 
     return parsedData
   } catch (err) {

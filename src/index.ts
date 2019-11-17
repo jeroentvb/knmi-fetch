@@ -1,5 +1,5 @@
 import fetch, { RequestInit } from 'node-fetch'
-import parse from './modules/data'
+import parser from './modules/parser'
 import helper from './modules/helper'
 import queryString from './modules/query-string'
 
@@ -14,21 +14,17 @@ export async function days (stationCode: string | number, vars?: DailyVars): Pro
     body: queryString.days(stationCode, vars)
   }
 
-  if (vars) {
-    const err = helper.checkVars.days(vars)
-    if (err) throw err
-  }
-
   try {
     const res = await fetch(helper.url(), options)
     const data = await res.text()
 
+    // TODO remove this
     const fs = require('fs')
     fs.writeFile('data-export.txt', data, (err: any) => {
       if (err) throw err
     })
 
-    const parsedData = parse.days(data)
+    const parsedData = parser.days(data)
 
     if (parsedData[0].STN != stationCode) {
       throw new Error('Station doesn\'t exist')

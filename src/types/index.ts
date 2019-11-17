@@ -48,3 +48,8 @@ export type DailyVarString =
 'VICL'|
 'MSTR'|
 'ALL'
+
+export interface TimeSpan {
+  start?: string;
+  end?: string;
+}

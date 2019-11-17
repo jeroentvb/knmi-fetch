@@ -3,15 +3,15 @@ import parser from './modules/parser'
 import helper from './modules/helper'
 import queryString from './modules/query-string'
 
-import { DailyVars } from './types'
+import { DailyVars, TimeSpan } from './types'
 
-export async function days (stationCode: string | number, vars?: DailyVars): Promise<{ [key: string]: string }[]> {
+export async function days (stationCode: string | number, vars?: DailyVars, timeSpan?: TimeSpan): Promise<{ [key: string]: string }[]> {
   const options: RequestInit = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
-    body: queryString.days(stationCode, vars)
+    body: queryString.days(stationCode, vars, timeSpan)
   }
 
   try {

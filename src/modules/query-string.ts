@@ -3,28 +3,42 @@ import helper from './helper'
 import { DailyVars, TimeSpan } from "../types"
 import { BodyInit } from "node-fetch"
 
-function days (stationCode: string | number, vars?: DailyVars, timeSpan?: TimeSpan): BodyInit {
+function days (
+    stationCode: string | number,
+    vars?: DailyVars,
+    timeSpan?: TimeSpan,
+    inSeason?: boolean
+  ): BodyInit {
   const params = {
-    vars: '',
-    timeSpan: '' //'byear=2018&bmonth=1&bday=1&eyear=2019&emonth=8&eday=18'
+    vars: parseVars(vars),
+    timeSpan: parseTimeSpan(timeSpan), //'byear=2018&bmonth=1&bday=1&eyear=2019&emonth=8&eday=18'
+    inSeason: setInseason(inSeason, timeSpan)
   }
 
+  return `stns=${stationCode}&vars=${params.vars}${params.timeSpan}${params.inSeason}`
+}
+
+function parseVars (vars: DailyVars | undefined) {
   if (vars) {
     const err = helper.checkVars.days(vars)
     if (err) throw err
   }
 
   if (!vars) {
-    params.vars = 'ALL'
+    return 'ALL'
   } else if (typeof vars === 'string') {
-    params.vars = vars
+    return vars
   } else if (Array.isArray(vars)) {
-    params.vars = vars.join(':')
+    return vars.join(':')
   }
+}
+
+function parseTimeSpan (timeSpan: TimeSpan | undefined): string {
+  let timeSpanStr = ''
 
   if (timeSpan && timeSpan.start) {
     if (timeSpan.start.length === 8) {
-      params.timeSpan += `&start=${timeSpan.start}`
+      timeSpanStr += `&start=${timeSpan.start}`
     } else {
       throw new Error('timeSpan.start does not contain 8 characters')
     }
@@ -32,13 +46,22 @@ function days (stationCode: string | number, vars?: DailyVars, timeSpan?: TimeSp
 
   if (timeSpan && timeSpan.end) {
     if (timeSpan.end.length === 8) {
-      params.timeSpan += `&end=${timeSpan.end}`
+      timeSpanStr += `&end=${timeSpan.end}`
     } else {
       throw new Error('timeSpan.end does not contain 8 characters')
     }
   }
 
-  return `stns=${stationCode}&vars=${params.vars}${params.timeSpan}`
+  return timeSpanStr
+}
+
+function setInseason (inSeason?: boolean, timeSpan?: TimeSpan) {
+  if (inSeason && timeSpan && timeSpan.start && timeSpan.end) {
+    return '&inseason=Y'
+  } else {
+    throw new Error('Missing start or end date. Otherwise "inSeason" won\'t work')
+  }
+  
 }
 
 export default {

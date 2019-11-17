@@ -5,13 +5,18 @@ import queryString from './modules/query-string'
 
 import { DailyVars, TimeSpan } from './types'
 
-export async function days (stationCode: string | number, vars?: DailyVars, timeSpan?: TimeSpan): Promise<{ [key: string]: string }[]> {
+export async function days (
+    stationCode: string | number,
+    vars?: DailyVars,
+    timeSpan?: TimeSpan,
+    inSeason?: boolean
+  ): Promise<{ [key: string]: string }[]> {
   const options: RequestInit = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
-    body: queryString.days(stationCode, vars, timeSpan)
+    body: queryString.days(stationCode, vars, timeSpan, inSeason)
   }
 
   try {

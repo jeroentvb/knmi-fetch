@@ -22,13 +22,6 @@ async function days (
   try {
     const res = await fetch(helper.url(), options)
     const data = await res.text()
-
-    // TODO remove this
-    const fs = require('fs')
-    fs.writeFile('data-export.txt', data, (err: any) => {
-      if (err) throw err
-    })
-
     const parsedData = parser.days(data)
 
     if (parsedData[0].STN != stationCode) {

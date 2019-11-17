@@ -1,9 +1,12 @@
 {
-  "name": "node-nmi-fetch",
+  "name": "node-knmi-fetch",
   "version": "0.2.0",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
     "prepack": "tsc",
     "build": "tsc",

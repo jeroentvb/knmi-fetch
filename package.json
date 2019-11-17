@@ -1,6 +1,6 @@
 {
-  "name": "knmi-fetch",
-  "version": "0.1.0",
+  "name": "node-nmi-fetch",
+  "version": "0.2.0",
   "description": "",
   "main": "dist/index.js",
   "scripts": {

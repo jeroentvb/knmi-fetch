@@ -5,9 +5,9 @@ import queryString from './modules/query-string'
 
 import { DailyVars, TimeSpan } from './types'
 
-export async function days (
+async function days (
     stationCode: string | number,
-    vars?: DailyVars,
+    variables?: DailyVars,
     timeSpan?: TimeSpan,
     inSeason?: boolean
   ): Promise<{ [key: string]: string }[]> {
@@ -16,7 +16,7 @@ export async function days (
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
-    body: queryString.days(stationCode, vars, timeSpan, inSeason)
+    body: queryString.days(stationCode, variables, timeSpan, inSeason)
   }
 
   try {
@@ -39,4 +39,12 @@ export async function days (
   } catch (err) {
     throw err
   }
+}
+
+module.exports = {
+  days
+}
+
+export default {
+  days
 }

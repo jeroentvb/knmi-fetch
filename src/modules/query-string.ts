@@ -5,12 +5,12 @@ import { BodyInit } from "node-fetch"
 
 function days (
     stationCode: string | number,
-    vars?: DailyVars,
+    variables?: DailyVars,
     timeSpan?: TimeSpan,
     inSeason?: boolean
   ): BodyInit {
   const params = {
-    vars: parseVars(vars),
+    vars: parseVars(variables),
     timeSpan: parseTimeSpan(timeSpan), //'byear=2018&bmonth=1&bday=1&eyear=2019&emonth=8&eday=18'
     inSeason: setInseason(inSeason, timeSpan)
   }
@@ -55,13 +55,14 @@ function parseTimeSpan (timeSpan: TimeSpan | undefined): string {
   return timeSpanStr
 }
 
-function setInseason (inSeason?: boolean, timeSpan?: TimeSpan) {
-  if (inSeason && timeSpan && timeSpan.start && timeSpan.end) {
-    return '&inseason=Y'
-  } else {
-    throw new Error('Missing start or end date. Otherwise "inSeason" won\'t work')
+function setInseason (inSeason?: boolean, timeSpan?: TimeSpan): string | void {
+  if (inSeason) {
+    if (timeSpan && timeSpan.start && timeSpan.end) {
+      return '&inseason=Y'
+    } else {
+      throw new Error('Missing start or end date. Otherwise "inSeason" won\'t work')
+    }
   }
-  
 }
 
 export default {

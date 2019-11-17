@@ -1,7 +1,7 @@
 const knmi = require('../dist/index')
 const helper = require('jeroentvb-helper')
 
-knmi.days(process.argv[2] || 249, 'WIND', {
+knmi.days(process.argv[2] || 249, 'ALL', {
   start: '19990114',
   end: '20190114'
 }, true)

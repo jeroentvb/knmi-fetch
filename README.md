@@ -1,3 +1,5 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/b577bf1f979962766be6/maintainability)](https://codeclimate.com/github/jeroentvb/node-knmi-fetch/maintainability)
+
 # node-knmi-fetch
 Fetch data and parse it to JSON to use it in node.  
 [Knmi docs](https://www.knmi.nl/kennis-en-datacentrum/achtergrond/data-ophalen-vanuit-een-script) about the API (Dutch).

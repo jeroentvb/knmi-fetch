@@ -1,10 +1,19 @@
 import fetch, { RequestInit } from 'node-fetch'
 import parser from './modules/parser'
-import helper from './modules/helper'
 import queryString from './modules/query-string'
 
 import { DailyVars, TimeSpan } from './types'
 
+import { API_URL } from './constants'
+
+/**
+ * Fetches and parses the daily climatology data from a station from the KNMI
+ * @param stationCode: string | number
+ * @param variables: string | string[]
+ * @param timeSpan: { start: string, end: string }
+ * @param inSeason: boolean
+ * @returns Promise<{ [key: string]: string }[]>
+ */
 async function days (
     stationCode: string | number,
     variables?: DailyVars,
@@ -20,7 +29,7 @@ async function days (
   }
 
   try {
-    const res = await fetch(helper.url(), options)
+    const res = await fetch(API_URL, options)
     const data = await res.text()
     const parsedData = parser.days(data)
 

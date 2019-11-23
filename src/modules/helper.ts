@@ -1,13 +1,12 @@
-import { RequestInfo } from "node-fetch"
-
 import { DAILYVARS } from '../constants'
 
-import { DailyVars } from '../types'
+import { DailyVars, DailyVarString } from '../types'
 
-function url (): RequestInfo {
-  return 'http://projects.knmi.nl/klimatologie/daggegevens/getdata_dag.cgi'
-}
-
+/**
+ * Parse the string that contains variable names to an array of variable names.
+ * @param legend
+ * @returns string[]
+ */
 function parseLegend (legend: string): string[] {
   return legend
     .replace('# ', '')
@@ -15,26 +14,35 @@ function parseLegend (legend: string): string[] {
     .map((item: string) => item.trim())
 }
 
-function days (vars: DailyVars): Error | void {
+/**
+ * Check if vars is an array of strings or single string.
+ * Check for if every string is a valid DailyVarsString.
+ * @param vars
+ * @returns void
+ */
+function days (vars: DailyVars): void {
   if (typeof vars === 'string') {
-    const index = DAILYVARS.findIndex((key: string) => key === vars)
-
-    if (index === -1) {
-      return new Error(`Invalid key in VARS: ${vars}`)
-    }
+    checkVarsError(vars, vars)
   } else {
-    vars.forEach((varString: string) => {
-      const index = DAILYVARS.findIndex((key: string) => key === varString)
+    vars.forEach((varString: DailyVarString) => checkVarsError(varString, vars))
+  }
+}
 
-      if (index === -1) {
-        return new Error(`Invalid key in VARS: ${varString}`)
-      }
-    })
+/**
+ * Checks if the passed string is a valid DailyVarString, throw an error if it is not.
+ * @param findVar
+ * @param vars
+ * @returns void
+ */
+function checkVarsError (findVar: DailyVarString, vars: DailyVars): void {
+  const index = DAILYVARS.findIndex((key: string) => key === findVar)
+
+  if (index === -1) {
+    throw new Error(`Invalid key in VARS: ${vars}`)
   }
 }
 
 export default {
-  url,
   parseLegend,
   checkVars: {
     days

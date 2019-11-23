@@ -1,3 +1,5 @@
+export const API_URL = 'http://projects.knmi.nl/klimatologie/daggegevens/getdata_dag.cgi'
+
 export const DAILYVARS = [
   'DDVEC',
   'FHVEC',

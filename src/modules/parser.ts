@@ -1,5 +1,10 @@
 import helper from './helper'
 
+/**
+ * Takes the knmi station data (txt) and parses it to usable json
+ * @param data string
+ * @returns object[]
+ */
 function days (data: string): { [key: string]: string }[] {
   let legend: string[]
   return data

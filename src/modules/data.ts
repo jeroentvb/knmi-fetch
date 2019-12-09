@@ -5,6 +5,11 @@ import parser from './parser'
 
 import { HourlyVars, DailyVars, TimeSpan } from '../types'
 
+/**
+ * get and parse the knmi data
+ * @param url 
+ * @param params 
+ */
 async function get (
   url: string,
   params: {

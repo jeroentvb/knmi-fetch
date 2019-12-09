@@ -2,17 +2,19 @@ import typeCheck from './check-types'
 import { DAILY, HOURLY, DAILYVARS, HOURLYVARS } from '../constants'
 
 function checkParams(
-  stationCode: any,
+  params: {
+    stationCode: any,
+    variables?: any,
+    timeSpan?: any,
+    inSeason?: any
+  },
   variableType: 'daily' | 'hourly',
-  variables?: any,
-  timeSpan?: any,
-  inSeason?: any
 ): void {
-  typeCheck.stationCode(stationCode)
-  if (variables && variableType === DAILY) typeCheck.vars(variables, DAILYVARS)
-  if (variables && variableType === HOURLY) typeCheck.vars(variables, HOURLYVARS)
-  if (timeSpan) typeCheck.timeSpan(timeSpan)
-  if (inSeason) typeCheck.inSeason(inSeason, timeSpan)
+  typeCheck.stationCode(params.stationCode)
+  if (params.variables && variableType === DAILY) typeCheck.vars(params.variables, DAILYVARS)
+  if (params.variables && variableType === HOURLY) typeCheck.vars(params.variables, HOURLYVARS)
+  if (params.timeSpan) typeCheck.timeSpan(params.timeSpan)
+  if (params.inSeason) typeCheck.inSeason(params.inSeason, params.timeSpan)
 }
 
 async function getData() {

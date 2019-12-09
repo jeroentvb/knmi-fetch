@@ -7,17 +7,24 @@ import { HourlyVars, DailyVars, TimeSpan } from '../types'
 
 async function get (
   url: string,
-  stationCode: string | number,
-  variables?: DailyVars | HourlyVars,
-  timeSpan?: TimeSpan,
-  inSeason?: boolean
+  params: {
+    stationCode: string | number,
+    variables?: DailyVars | HourlyVars,
+    timeSpan?: TimeSpan,
+    inSeason?: boolean
+  }
 ) {
   const options: RequestInit = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
-    body: queryString.create(stationCode, variables, timeSpan, inSeason)
+    body: queryString.create(
+      params.stationCode,
+      params.variables,
+      params.timeSpan,
+      params.inSeason
+    )
   }
 
   try {
@@ -25,7 +32,7 @@ async function get (
     const data = await res.text()
     const parsedData = parser.data(data)
 
-    if (parsedData[0].STN != stationCode) {
+    if (parsedData[0].STN != params.stationCode) {
       throw new Error('Station doesn\'t exist')
     }
 

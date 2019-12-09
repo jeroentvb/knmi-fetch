@@ -19,11 +19,21 @@ async function days (
   timeSpan?: TimeSpan,
   inSeason?: boolean
 ): Promise<{ [key: string]: string }[]> {
-  helper.checkParams(stationCode, DAILY, variables, timeSpan, inSeason)
+  helper.checkParams({
+    stationCode,
+    variables,
+    timeSpan,
+    inSeason
+  }, DAILY)
 
   try {
     const knmiData = await data
-      .get(API_URL_DAYS, stationCode, variables, timeSpan, inSeason)
+      .get(API_URL_DAYS, {
+        stationCode,
+        variables,
+        timeSpan,
+        inSeason
+      })
 
     return knmiData
   } catch (err) {
@@ -45,11 +55,21 @@ async function hours (
   timeSpan?: TimeSpan,
   inSeason?: boolean
 ) {
-  helper.checkParams(stationCode, HOURLY, variables, timeSpan, inSeason)
+  helper.checkParams({
+    stationCode,
+    variables,
+    timeSpan,
+    inSeason
+  }, HOURLY)
 
   try {
     const knmiData = await data
-      .get(API_URL_HOURS, stationCode, variables, timeSpan, inSeason)
+      .get(API_URL_HOURS, {
+        stationCode,
+        variables,
+        timeSpan,
+        inSeason
+      })
 
     return knmiData
   } catch (err) {

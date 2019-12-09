@@ -1,7 +1,5 @@
-import helper from './helper'
-
-import { DailyVars, TimeSpan } from "../types"
-import { BodyInit } from "node-fetch"
+import { DailyVars, TimeSpan, HourlyVars } from '../types'
+import { BodyInit } from 'node-fetch'
 
 /**
  * Pass in all the parameters and return the query as a string.
@@ -11,16 +9,16 @@ import { BodyInit } from "node-fetch"
  * @param inSeason boolean
  * @returns string
  */
-function days (
+function create (
     stationCode: string | number,
-    variables?: DailyVars,
+    variables?: DailyVars | HourlyVars,
     timeSpan?: TimeSpan,
     inSeason?: boolean
   ): BodyInit {
   const params = {
     vars: parseVars(variables),
     timeSpan: parseTimeSpan(timeSpan),
-    inSeason: setInseason(inSeason, timeSpan)
+    inSeason: setInseason(inSeason)
   }
 
   return `stns=${stationCode}&vars=${params.vars}${params.timeSpan}${params.inSeason}`
@@ -33,13 +31,10 @@ function days (
  * @param vars 
  * @returns string
  */
-function parseVars (vars: DailyVars | undefined): string {
-  if (vars) helper.checkVars.days(vars)
-
+function parseVars (vars: DailyVars | HourlyVars | undefined): string {
   if (!vars) return 'ALL'
 
   return Array.isArray(vars) ? vars.join(':') : vars
-
 }
 
 /**
@@ -48,48 +43,27 @@ function parseVars (vars: DailyVars | undefined): string {
  * @returns string
  */
 function parseTimeSpan (timeSpan?: TimeSpan): string {
-  let timeSpanStr = ''
-
-  if (timeSpan && timeSpan.start) {
-    timeSpanStr += `&start=${checkTimeSpan(timeSpan.start)}`
+  if (timeSpan) {
+    return `&start=${timeSpan.start}&end=${timeSpan.end}`
   }
 
-  if (timeSpan && timeSpan.end) {
-    timeSpanStr += `&end=${checkTimeSpan(timeSpan.end)}`
-  }
-
-  return timeSpanStr
-}
-
-/**
- * Check if the passed in timeSpan is valid, throws an error if not.
- * @param timeSpan: { start: string, end: string }
- * @returns string
- */
-function checkTimeSpan(timeSpan: string): string {
-  if (timeSpan.length === 8) {
-    return timeSpan
-  } else {
-    throw new Error(`timeSpan ${timeSpan} does not contain 8 characters`)
-  }
+  return ''
 }
 
 /**
  * Checks if inSeason is set to true and if there is a timeSpan.
  * @param inSeason boolean
  * @param timeSpan { start: string, end: string }
- * @returns string | void
+ * @returns string
  */
-function setInseason (inSeason?: boolean, timeSpan?: TimeSpan): string | void {
+function setInseason (inSeason?: boolean): string {
   if (inSeason) {
-    if (timeSpan && timeSpan.start && timeSpan.end) {
-      return '&inseason=Y'
-    } else {
-      throw new Error('Missing start or end date. Otherwise "inSeason" won\'t work')
-    }
+    return '&inseason=Y'
   }
+
+  return ''
 }
 
 export default {
-  days
+  create
 }

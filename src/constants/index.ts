@@ -1,6 +1,13 @@
-export const API_URL = 'http://projects.knmi.nl/klimatologie/daggegevens/getdata_dag.cgi'
+import { DailyVarString, HourlyVarString } from '../types'
 
-export const DAILYVARS = [
+export const API_URL_DAYS = 'http://projects.knmi.nl/klimatologie/daggegevens/getdata_dag.cgi'
+
+export const API_URL_HOURS = 'http://projects.knmi.nl/klimatologie/uurgegevens/getdata_uur.cgi'
+
+export const DAILY = 'daily'
+export const HOURLY = 'hourly'
+
+export const DAILYVARS: DailyVarString[] = [
   'DDVEC',
   'FHVEC',
   'FG',
@@ -47,5 +54,35 @@ export const DAILYVARS = [
   'PRES',
   'VICL',
   'MSTR',
+  'ALL'
+]
+
+export const HOURLYVARS: HourlyVarString[] = [
+  'DD',
+  'FH',
+  'FF',
+  'FX',
+  'T',
+  'T10N',
+  'TD',
+  'SQ',
+  'Q',
+  'DR',
+  'RH',
+  'VV',
+  'N',
+  'U',
+  'M',
+  'R',
+  'S',
+  'O',
+  'Y',
+  'WW',
+  'WIND',
+  'TEMP',
+  'SUNR',
+  'PRCP',
+  'VICL',
+  'WEER',
   'ALL'
 ]

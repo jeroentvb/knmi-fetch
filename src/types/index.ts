@@ -49,6 +49,37 @@ export type DailyVarString =
 'MSTR'|
 'ALL'
 
+export type HourlyVars = HourlyVarString | HourlyVarString[]
+
+export type HourlyVarString =
+  'DD' |
+  'FH' |
+  'FF' |
+  'FX' |
+  'T' |
+  'T10N' |
+  'TD' |
+  'SQ' |
+  'Q' |
+  'DR' |
+  'RH' |
+  'VV' |
+  'N' |
+  'U' |
+  'M' |
+  'R' |
+  'S' |
+  'O' |
+  'Y' |
+  'WW' |
+  'WIND' |
+  'TEMP' |
+  'SUNR' |
+  'PRCP' |
+  'VICL' |
+  'WEER' |
+  'ALL'
+
 export interface TimeSpan {
   start?: string
   end?: string

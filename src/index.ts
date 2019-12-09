@@ -1,10 +1,9 @@
-import fetch, { RequestInit } from 'node-fetch'
-import parser from './modules/parser'
-import queryString from './modules/query-string'
+import data from './modules/data'
+import helper from './modules/helper'
 
-import { DailyVars, TimeSpan } from './types'
+import { API_URL_DAYS, API_URL_HOURS, HOURLY, DAILY } from './constants'
 
-import { API_URL } from './constants'
+import { DailyVars, TimeSpan, HourlyVars } from './types'
 
 /**
  * Fetches and parses the daily climatology data from a station from the KNMI
@@ -15,38 +14,75 @@ import { API_URL } from './constants'
  * @returns Promise<{ [key: string]: string }[]>
  */
 async function days (
-    stationCode: string | number,
-    variables?: DailyVars,
-    timeSpan?: TimeSpan,
-    inSeason?: boolean
-  ): Promise<{ [key: string]: string }[]> {
-  const options: RequestInit = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    body: queryString.days(stationCode, variables, timeSpan, inSeason)
-  }
+  stationCode: string | number,
+  variables?: DailyVars,
+  timeSpan?: TimeSpan,
+  inSeason?: boolean
+): Promise<{ [key: string]: string }[]> {
+  helper.checkParams({
+    stationCode,
+    variables,
+    timeSpan,
+    inSeason
+  }, DAILY)
 
   try {
-    const res = await fetch(API_URL, options)
-    const data = await res.text()
-    const parsedData = parser.days(data)
+    const knmiData = await data
+      .get(API_URL_DAYS, {
+        stationCode,
+        variables,
+        timeSpan,
+        inSeason
+      })
 
-    if (parsedData[0].STN != stationCode) {
-      throw new Error('Station doesn\'t exist')
-    }
+    return knmiData
+  } catch (err) {
+    throw err
+  }
+}
 
-    return parsedData
+/**
+ * Fetches and parses the hourly climatology data from a station from the KNMI
+ * @param stationCode: string | number
+ * @param variables: string | string[]
+ * @param timeSpan: { start: string, end: string }
+ * @param inSeason: boolean
+ * @returns Promise<{ [key: string]: string }[]>
+ */
+async function hours (
+  stationCode: string | number,
+  variables?: HourlyVars,
+  timeSpan?: TimeSpan,
+  inSeason?: boolean
+) {
+  helper.checkParams({
+    stationCode,
+    variables,
+    timeSpan,
+    inSeason
+  }, HOURLY)
+
+  try {
+    const knmiData = await data
+      .get(API_URL_HOURS, {
+        stationCode,
+        variables,
+        timeSpan,
+        inSeason
+      })
+
+    return knmiData
   } catch (err) {
     throw err
   }
 }
 
 module.exports = {
-  days
+  days,
+  hours
 }
 
 export default {
-  days
+  days,
+  hours
 }

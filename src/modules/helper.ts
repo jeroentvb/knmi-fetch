@@ -1,50 +1,26 @@
-import { DAILYVARS } from '../constants'
+import typeCheck from './check-types'
+import { DAILY, HOURLY, DAILYVARS, HOURLYVARS } from '../constants'
 
-import { DailyVars, DailyVarString } from '../types'
-
-/**
- * Parse the string that contains variable names to an array of variable names.
- * @param legend
- * @returns string[]
- */
-function parseLegend (legend: string): string[] {
-  return legend
-    .replace('# ', '')
-    .split(',')
-    .map((item: string) => item.trim())
+function checkParams(
+  params: {
+    stationCode: any,
+    variables?: any,
+    timeSpan?: any,
+    inSeason?: any
+  },
+  variableType: 'daily' | 'hourly',
+): void {
+  typeCheck.stationCode(params.stationCode)
+  if (params.variables && variableType === DAILY) typeCheck.vars(params.variables, DAILYVARS)
+  if (params.variables && variableType === HOURLY) typeCheck.vars(params.variables, HOURLYVARS)
+  if (params.timeSpan) typeCheck.timeSpan(params.timeSpan)
+  if (params.inSeason) typeCheck.inSeason(params.inSeason, params.timeSpan)
 }
 
-/**
- * Check if vars is an array of strings or single string.
- * Check for if every string is a valid DailyVarsString.
- * @param vars
- * @returns void
- */
-function days (vars: DailyVars): void {
-  if (typeof vars === 'string') {
-    checkVarsError(vars, vars)
-  } else {
-    vars.forEach((varString: DailyVarString) => checkVarsError(varString, vars))
-  }
-}
+async function getData() {
 
-/**
- * Checks if the passed string is a valid DailyVarString, throw an error if it is not.
- * @param findVar
- * @param vars
- * @returns void
- */
-function checkVarsError (findVar: DailyVarString, vars: DailyVars): void {
-  const index = DAILYVARS.findIndex((key: string) => key === findVar)
-
-  if (index === -1) {
-    throw new Error(`Invalid key in VARS: ${vars}`)
-  }
 }
 
 export default {
-  parseLegend,
-  checkVars: {
-    days
-  }
+  checkParams
 }

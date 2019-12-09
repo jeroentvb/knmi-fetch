@@ -2,9 +2,9 @@ const knmi = require('../dist/index')
 const helper = require('jeroentvb-helper')
 
 function testDays () {
-  knmi.days(process.argv[2] || 249, 'ALL', {
+  knmi.days(process.argv[2] || 249, 'WIND', {
     start: '19990114',
-    end: '20190114'
+    end: '20190115'
   }, true)
     .then(res => {
       helper.exportToFile('data', res)
@@ -22,5 +22,5 @@ function testHours () {
     .catch(err => console.error(err))
 }
 
-// testDays()
-testHours()
+testDays()
+// testHours()

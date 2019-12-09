@@ -30,6 +30,7 @@
   "devDependencies": {
     "@types/node": "^12.12.6",
     "@types/node-fetch": "^2.5.3",
+    "jeroentvb-helper": "github:jeroentvb/jeroentvb-helper",
     "typescript": "^3.7.2"
   }
 }

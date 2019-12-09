@@ -4,6 +4,9 @@ export const API_URL_DAYS = 'http://projects.knmi.nl/klimatologie/daggegevens/ge
 
 export const API_URL_HOURS = 'http://projects.knmi.nl/klimatologie/uurgegevens/getdata_uur.cgi'
 
+export const DAILY = 'daily'
+export const HOURLY = 'hourly'
+
 export const DAILYVARS: DailyVarString[] = [
   'DDVEC',
   'FHVEC',

@@ -19,24 +19,14 @@ function stationCode (stationCode: any): void {
  * Check for if every string is a valid DailyVarsString.
  * @param vars string | string[]
  */
-function dailyVars (vars: string | string[]): void {
+function vars (
+    vars: string | string[],
+    validVars: DailyVarString[] | HourlyVarString[]
+  ): void {
   if (typeof vars === 'string') {
-    checkVarsError(vars, DAILYVARS)
+    checkVarsError(vars, validVars)
   } else {
-    vars.forEach((varString: string) => checkVarsError(varString, DAILYVARS))
-  }
-}
-
-/**
- * Check if vars is an array of strings or single string.
- * Check for if every string is a valid HourlyVarString.
- * @param vars
- */
-function hourlyVars (vars: string | string[]): void {
-  if (typeof vars === 'string') {
-    checkVarsError(vars, HOURLYVARS)
-  } else {
-    vars.forEach((varString: string) => checkVarsError(varString, HOURLYVARS))
+    vars.forEach((varString: string) => checkVarsError(varString, validVars))
   }
 }
 
@@ -88,8 +78,7 @@ function inSeason (inSeason: any, timeSpan: TimeSpan): void {
 
 export default {
   stationCode,
-  dailyVars,
-  hourlyVars,
+  vars,
   timeSpan,
   inSeason
 }

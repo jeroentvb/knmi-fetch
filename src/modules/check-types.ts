@@ -1,5 +1,3 @@
-import { DAILYVARS, HOURLYVARS } from '../constants'
-
 import { DailyVarString, HourlyVarString, TimeSpan } from '../types'
 
 /**
@@ -20,9 +18,9 @@ function stationCode (stationCode: any): void {
  * @param vars string | string[]
  */
 function vars (
-    vars: string | string[],
-    validVars: DailyVarString[] | HourlyVarString[]
-  ): void {
+  vars: string | string[],
+  validVars: DailyVarString[] | HourlyVarString[]
+): void {
   if (typeof vars === 'string') {
     checkVarsError(vars, validVars)
   } else {

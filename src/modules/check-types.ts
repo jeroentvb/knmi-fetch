@@ -73,7 +73,7 @@ function checkTimeSpanErrors (timeSpan: any): void {
  */
 function inSeason (inSeason: any, timeSpan: TimeSpan): void {
   if (typeof inSeason !== 'boolean') throw new TypeError('inSeason must be of type boolean')
-  if (!timeSpan || !timeSpan.end|| !timeSpan.start) throw new Error('Missing timeSpan')
+  if (!timeSpan) throw new Error('Missing timeSpan')
 }
 
 export default {

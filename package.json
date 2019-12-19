@@ -2,7 +2,7 @@
   "name": "node-knmi-fetch",
   "version": "0.2.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/knmi-fetch.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist/**/*"
@@ -12,7 +12,8 @@
     "build": "tsc",
     "watch": "tsc -w",
     "start": "node ./dist/index.js",
-    "test": "node test/test.js"
+    "test": "jest",
+    "test-dev": "node test/test.js"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,12 @@
     "@types/node": "^12.12.6",
     "@types/node-fetch": "^2.5.3",
     "jeroentvb-helper": "github:jeroentvb/jeroentvb-helper",
+    "jest": "^24.9.0",
     "typescript": "^3.7.2"
-  }
+  },
+  "keywords": [
+    "knmi",
+    "api",
+    "fetch"
+  ]
 }

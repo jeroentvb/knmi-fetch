@@ -1,7 +1,7 @@
 {
   "name": "node-knmi-fetch",
   "version": "0.2.0",
-  "description": "",
+  "description": "Fetch data from the KNMI weather stations",
   "main": "dist/knmi-fetch.js",
   "types": "dist/index.d.ts",
   "files": [

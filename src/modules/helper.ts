@@ -1,6 +1,11 @@
 import typeCheck from './check-types'
 import { DAILY, HOURLY, DAILYVARS, HOURLYVARS } from '../constants'
 
+/**
+ * Check if the params are in the correct format
+ * @param params 
+ * @param variableType
+ */
 function checkParams(
   params: {
     stationCode: any,
@@ -15,10 +20,6 @@ function checkParams(
   if (params.variables && variableType === HOURLY) typeCheck.vars(params.variables, HOURLYVARS)
   if (params.timeSpan) typeCheck.timeSpan(params.timeSpan)
   if (params.inSeason) typeCheck.inSeason(params.inSeason, params.timeSpan)
-}
-
-async function getData() {
-
 }
 
 export default {

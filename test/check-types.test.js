@@ -1,4 +1,4 @@
-/* global describe, it, expect, jest */
+/* global describe, it, expect */
 
 const typeCheck = require('../dist/modules/check-types').default
 

@@ -24,9 +24,3 @@ function testHours () {
 
 // testDays()
 // testHours()
-
-describe('testing', () => {
-  it('should do stuff', () => {
-    expect(true).toEqual(true)
-  })
-})

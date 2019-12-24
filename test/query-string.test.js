@@ -6,7 +6,6 @@ const mockData = require('./mock-data')
 
 describe('The query string module', () => {
   it('should return a query string with the corerct variables', () => {
-
     expect(
       queryString.create(mockData.STATION_CODE)
     ).toEqual('stns=249&vars=ALL')

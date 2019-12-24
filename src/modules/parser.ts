@@ -5,6 +5,7 @@
  */
 function data (data: string): { [key: string]: string }[] {
   let legend: string[]
+
   return data
     // Split string at newline characters
     .split('\n')

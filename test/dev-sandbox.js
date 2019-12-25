@@ -14,7 +14,7 @@ function testDays () {
 }
 
 function testHours () {
-  knmi.hours(process.argv[2] || 249, 'WIND', {
+  knmi.hours(process.argv[2] || 249, 'ALL', {
     start: '2019011401',
     end: '2019011601'
   }, true)
@@ -23,4 +23,4 @@ function testHours () {
 }
 
 // testDays()
-// testHours()
+testHours()

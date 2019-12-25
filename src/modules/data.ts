@@ -35,6 +35,11 @@ async function get (
   try {
     const res = await fetch(url, options)
     const data = await res.text()
+
+    const helper = require('jeroentvb-helper')
+
+    helper.exportToFile('data', data)
+    
     const parsedData = parser.data(data)
 
     if (parsedData[0].STN != params.stationCode) {

@@ -1,4 +1,4 @@
-const knmi = require('../dist/index')
+const knmi = require('../dist/knmi-fetch')
 const helper = require('jeroentvb-helper')
 
 function testDays () {
@@ -14,7 +14,7 @@ function testDays () {
 }
 
 function testHours () {
-  knmi.hours(process.argv[2] || 249, 'WIND', {
+  knmi.hours(process.argv[2] || 249, 'ALL', {
     start: '2019011401',
     end: '2019011601'
   }, true)
@@ -22,5 +22,5 @@ function testHours () {
     .catch(err => console.error(err))
 }
 
-testDays()
-// testHours()
+// testDays()
+testHours()

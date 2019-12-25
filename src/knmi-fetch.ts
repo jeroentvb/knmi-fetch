@@ -77,12 +77,7 @@ async function hours (
   }
 }
 
-module.exports = {
-  days,
-  hours
-}
-
-export default {
+export {
   days,
   hours
 }

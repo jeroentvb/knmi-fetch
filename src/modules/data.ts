@@ -34,7 +34,7 @@ async function get (
 
   try {
     const res = await fetch(url, options)
-    const data = await res.text()    
+    const data = await res.text()
     const parsedData = parser.data(data)
 
     if (parsedData[0].STN != params.stationCode) {

@@ -35,9 +35,9 @@ async function get (
   try {
     const res = await fetch(url, options)
     const data = await res.text()
-    const parsedData = parser.data(data)
+    const parsedData = parser.data(data, params.stationCode)
 
-    if (parsedData[0].STN != params.stationCode) {
+    if (parsedData.data[0].STN != params.stationCode) {
       throw new Error('Station doesn\'t exist')
     }
 

@@ -1,3 +1,16 @@
+export interface StationData {
+  station: {
+    name: string
+    code: string | number
+    coordinates: {
+      lat: number
+      lng: number
+    }
+    altitude: number
+  }
+  data: { [key: string]: string }[]
+}
+
 export type DailyVars = DailyVarString | DailyVarString[]
 
 export type DailyVarString =

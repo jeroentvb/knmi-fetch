@@ -3,7 +3,7 @@ import helper from './modules/helper'
 
 import { API_URL_DAYS, API_URL_HOURS, HOURLY, DAILY } from './constants'
 
-import { DailyVars, TimeSpan, HourlyVars } from './types'
+import { DailyVars, TimeSpan, HourlyVars, StationData } from './types'
 
 /**
  * Fetches and parses the daily climatology data from a station from the KNMI
@@ -18,7 +18,7 @@ async function days (
   variables?: DailyVars,
   timeSpan?: TimeSpan,
   inSeason?: boolean
-): Promise<{ [key: string]: string }[]> {
+): Promise<StationData> {
   helper.checkParams({
     stationCode,
     variables,
@@ -54,7 +54,7 @@ async function hours (
   variables?: HourlyVars,
   timeSpan?: TimeSpan,
   inSeason?: boolean
-) {
+): Promise<StationData> {
   helper.checkParams({
     stationCode,
     variables,

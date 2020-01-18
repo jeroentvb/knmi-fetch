@@ -6,20 +6,32 @@ module.exports = {
     end: '20190116'
   },
   INSEASON: true,
-  PARSED_API_RESPONSE: [
-    {
-      STN: '249',
-      YYYYMMDD: '20180101',
-      DDVEC: '229',
-      FHVEC: '63',
-      FG: '67',
-      FHX: '120',
-      FHXH: '2',
-      FHN: '20',
-      FHNH: '17',
-      FXX: '200',
-      FXXH: '3'
-    }],
+  PARSED_API_RESPONSE: {
+    station: {
+      name: 'BERKHOUT',
+      code: 249,
+      coordinates: {
+        lat: 52.644,
+        lng: 4.979
+      },
+      altitude: -2.4
+    },
+    data: [
+      {
+        STN: '249',
+        YYYYMMDD: '20180101',
+        DDVEC: '229',
+        FHVEC: '63',
+        FG: '67',
+        FHX: '120',
+        FHXH: '2',
+        FHN: '20',
+        FHNH: '17',
+        FXX: '200',
+        FXXH: '3'
+      }
+    ]
+  },
   API_RESPONSE: `# BRON: KONINKLIJK NEDERLANDS METEOROLOGISCH INSTITUUT (KNMI)
   # Opmerking: door stationsverplaatsingen en veranderingen in waarneemmethodieken zijn deze tijdreeksen van dagwaarden mogelijk inhomogeen! Dat betekent dat deze reeks van gemeten waarden niet geschikt is voor trendanalyse. Voor studies naar klimaatverandering verwijzen we naar de gehomogeniseerde reeks maandtemperaturen van De Bilt <http://www.knmi.nl/kennis-en-datacentrum/achtergrond/gehomogeniseerde-reeks-maandtemperaturen-de-bilt> of de Centraal Nederland Temperatuur <http://www.knmi.nl/kennis-en-datacentrum/achtergrond/centraal-nederland-temperatuur-cnt>.
   # 

@@ -26,7 +26,7 @@ describe('The data module', () => {
       .toHaveBeenCalledWith(mockData.STATION_CODE, undefined, undefined, undefined)
   })
 
-  it('should call the queryString.create function', async () => {
+  it('should call the parser.data function', async () => {
     const dataParser = jest.spyOn(parser, 'data')
 
     fetch.mockReturnValue(Promise.resolve(new Response(mockData.API_RESPONSE)))
@@ -36,6 +36,6 @@ describe('The data module', () => {
     })
 
     expect(dataParser)
-      .toHaveBeenCalledWith(mockData.API_RESPONSE)
+      .toHaveBeenCalledWith(mockData.API_RESPONSE, mockData.STATION_CODE)
   })
 })

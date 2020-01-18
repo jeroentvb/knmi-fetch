@@ -143,29 +143,28 @@ Data will be returned in the following format:
 <summary>Data format</summary>
 
 ```json
-
-    station: {
-      name: 'BERKHOUT',
-      code: 249,
-      coordinates: {
-        lat: 52.644,
-        lng: 4.979
+    "station": {
+      "name": "BERKHOUT",
+      "code": 249,
+      "coordinates": {
+        "lat": 52.644,
+        "lng": 4.979
       },
-      altitude: -2.4
+      "altitude": -2.4
     },
-    data: [
+    "data": [
       {
-        STN: '249',
-        YYYYMMDD: '20180101',
-        DDVEC: '229',
-        FHVEC: '63',
-        FG: '67',
-        FHX: '120',
-        FHXH: '2',
-        FHN: '20',
-        FHNH: '17',
-        FXX: '200',
-        FXXH: '3'
+        "STN": "249",
+        "YYYYMMDD": "20180101",
+        "DDVEC": "229",
+        "FHVEC": "63",
+        "FG": "67",
+        "FHX": "120",
+        "FHXH": "2",
+        "FHN": "20",
+        "FHNH": "17",
+        "FXX": "200",
+        "FXXH": "3"
       }
     ]
   }
@@ -253,29 +252,28 @@ Data will be returned in the following format:
 <summary>Data format</summary>
 
 ```json
-
-    station: {
-      name: 'BERKHOUT',
-      code: 249,
-      coordinates: {
-        lat: 52.644,
-        lng: 4.979
+    "station": {
+      "name": "BERKHOUT",
+      "code": 249,
+      "coordinates": {
+        "lat": 52.644,
+        "lng": 4.979
       },
-      altitude: -2.4
+      "altitude": -2.4
     },
-    data: [
+    "data": [
       {
-        STN: '249',
-        YYYYMMDD: '20180101',
-        DDVEC: '229',
-        FHVEC: '63',
-        FG: '67',
-        FHX: '120',
-        FHXH: '2',
-        FHN: '20',
-        FHNH: '17',
-        FXX: '200',
-        FXXH: '3'
+        "STN": "249",
+        "YYYYMMDD": "20180101",
+        "DDVEC": "229",
+        "FHVEC": "63",
+        "FG": "67",
+        "FHX": "120",
+        "FHXH": "2",
+        "FHN": "20",
+        "FHNH": "17",
+        "FXX": "200",
+        "FXXH": "3"
       }
     ]
   }

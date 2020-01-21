@@ -1,4 +1,4 @@
-import { DailyVars, TimeSpan, HourlyVars } from '../types'
+import { DailyVars, TimeSpan, HourlyVars, StationCode } from '../types'
 import { BodyInit } from 'node-fetch'
 
 /**
@@ -10,18 +10,27 @@ import { BodyInit } from 'node-fetch'
  * @returns string
  */
 function create (
-    stationCode: string | number,
+    stationCode: StationCode,
     variables?: DailyVars | HourlyVars,
     timeSpan?: TimeSpan,
     inSeason?: boolean
   ): BodyInit {
   const params = {
+    stationCode: parseStationCode(stationCode),
     vars: parseVars(variables),
     timeSpan: parseTimeSpan(timeSpan),
     inSeason: setInseason(inSeason)
   }
 
-  return `stns=${stationCode}&vars=${params.vars}${params.timeSpan}${params.inSeason}`
+  return `stns=${params.stationCode}&vars=${params.vars}${params.timeSpan}${params.inSeason}`
+}
+
+function parseStationCode(stationCode: StationCode): string | number {
+  if (Array.isArray(stationCode)) {
+    return stationCode.join(':')
+  }
+
+  return stationCode
 }
 
 /**

@@ -5,6 +5,12 @@ const queryString = require('../dist/modules/query-string').default
 const mockData = require('./mock-data')
 
 describe('The query string module', () => {
+  it('should return a query string with the correct stations', () => {
+    expect(
+      queryString.create([mockData.STATION_CODE, mockData.STATION_CODE])
+    ).toEqual('stns=249:249&vars=ALL')
+  })
+
   it('should return a query string with the corerct variables', () => {
     expect(
       queryString.create(mockData.STATION_CODE)

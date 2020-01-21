@@ -8,6 +8,7 @@ const { Response } = jest.requireActual('node-fetch')
 
 const queryString = require('../dist/modules/query-string').default
 const parser = require('../dist/modules/parser').default
+const helper = require('../dist/modules/helper').default
 
 const mockData = require('./mock-data')
 const constants = require('../dist/constants')
@@ -37,5 +38,18 @@ describe('The data module', () => {
 
     expect(dataParser)
       .toHaveBeenCalledWith(mockData.API_RESPONSE, mockData.STATION_CODE)
+  })
+
+  it('should call the helper.checkStationExists function', async () => {
+    const checkStationExists = jest.spyOn(helper, 'checkStationExists')
+
+    fetch.mockReturnValue(Promise.resolve(new Response(mockData.API_RESPONSE)))
+
+    await data.get(constants.API_URL_DAYS, {
+      stationCode: mockData.STATION_CODE
+    })
+
+    expect(checkStationExists)
+      .toHaveBeenCalledWith(mockData.PARSED_API_RESPONSE, mockData.STATION_CODE)
   })
 })

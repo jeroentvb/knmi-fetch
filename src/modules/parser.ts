@@ -1,13 +1,16 @@
-import { StationData } from '../types'
+import helper from './helper'
+
+import { StationData, StationCode } from '../types'
 
 /**
  * Takes the knmi station data (txt) and parses it to usable json
  * @param data string
  * @returns object[]
  */
-function data (data: string, stationCode: string | number): StationData {
+function data (data: string, stationCode: StationCode): StationData[] {
   let legend: string[]
-  let stationInfo: StationData['station']
+  const stationInfo: StationData['station'][] = []
+  const stationData: StationData[] = []
 
   const dataArray: StationData['data'] = data
     // Split string at newline characters
@@ -21,10 +24,10 @@ function data (data: string, stationCode: string | number): StationData {
       }
 
       // Get the station info
-      if (row.includes('#') && row.includes(stationCode as string)) {
+      if (row.includes('#') && helper.includesStationCode(row, stationCode)) {
         const stationString = row.split(' ').filter(item => item)
 
-        stationInfo = createStationObject(stationString, stationCode)
+        stationInfo.push(createStationObject(stationString))
       }
       
       return !row.includes('#') && row !== ''
@@ -46,10 +49,14 @@ function data (data: string, stationCode: string | number): StationData {
       return data
     })
 
-    return {
-      station: stationInfo!,
-      data: dataArray
-    }
+    stationInfo.forEach((station: StationData['station'], i: number) => {
+      stationData[i] = {
+        station,
+        data: dataArray.filter(dataObj => dataObj.STN == station.code)
+      }
+    })
+
+    return stationData
 }
 
 /**
@@ -64,22 +71,26 @@ function parseLegend (legend: string): string[] {
     .map((item: string) => item.trim())
 }
 
-
 /**
  * Return a station info object
  * @param str 
  * @param stationCode
  * @returns Data['station']
  */
-function createStationObject (str: string[], stationCode: string | number): StationData['station'] {
+function createStationObject (str: string[]): StationData['station'] {
+  const stationName = str
+    .filter((item: string, i) => i > 4)
+    .map((item: string) => item.split('\r')[0])
+    .join(' ')
+
   return {
-    name: str[str.length - 1].split('\r')[0],
-    code: stationCode,
+    name: stationName,
+    code: parseInt(str[1].replace(':', '')),
     coordinates: {
-      lat: parseFloat(str[str.length - 3]),
-      lng: parseFloat(str[str.length - 4]),
+      lat: parseFloat(str[3]),
+      lng: parseFloat(str[2]),
     },
-    altitude: parseFloat(str[str.length - 2])
+    altitude: parseFloat(str[4])
   }
 }
 

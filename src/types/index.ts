@@ -11,6 +11,8 @@ export interface StationData {
   data: { [key: string]: string }[]
 }
 
+export type StationCode = string | number | string[] | number[]
+
 export type DailyVars = DailyVarString | DailyVarString[]
 
 export type DailyVarString =

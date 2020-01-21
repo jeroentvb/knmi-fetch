@@ -2,8 +2,9 @@ import fetch, { RequestInit } from 'node-fetch'
 
 import queryString from './query-string'
 import parser from './parser'
+import helper from './helper'
 
-import { HourlyVars, DailyVars, TimeSpan } from '../types'
+import { HourlyVars, DailyVars, TimeSpan, StationCode } from '../types'
 
 /**
  * get and parse the knmi data
@@ -13,7 +14,7 @@ import { HourlyVars, DailyVars, TimeSpan } from '../types'
 async function get (
   url: string,
   params: {
-    stationCode: string | number,
+    stationCode: StationCode,
     variables?: DailyVars | HourlyVars,
     timeSpan?: TimeSpan,
     inSeason?: boolean
@@ -37,9 +38,7 @@ async function get (
     const data = await res.text()
     const parsedData = parser.data(data, params.stationCode)
 
-    if (parsedData.data[0].STN != params.stationCode) {
-      throw new Error('Station doesn\'t exist')
-    }
+    helper.checkStationExists(parsedData, params.stationCode)
 
     return parsedData
   } catch (err) {

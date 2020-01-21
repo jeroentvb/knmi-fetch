@@ -1,5 +1,6 @@
 import typeCheck from './check-types'
 import { DAILY, HOURLY, DAILYVARS, HOURLYVARS } from '../constants'
+import { StationCode, StationData } from '../types'
 
 /**
  * Check if the params are in the correct format
@@ -22,6 +23,49 @@ function checkParams(
   if (params.inSeason) typeCheck.inSeason(params.inSeason, params.timeSpan)
 }
 
+/**
+ * Check if a string contains a station code
+ * @param row 
+ * @param stationCode 
+ * @returns boolean
+ */
+function includesStationCode (row: string, stationCode: StationCode): boolean {
+  let includes = false
+  
+  if (Array.isArray(stationCode)) {
+    stationCode.forEach((code: string | number) => {
+      if (row.includes(code + ':')) includes = true
+    })
+  } else {
+    if (row.includes(stationCode + ':')) includes = true
+  }
+
+  return includes
+}
+
+/**
+ * Check if all the given station codes exist in the parsed data
+ * @param data 
+ * @param stationCode 
+ */
+function checkStationExists (data: StationData[], stationCode: StationCode): void {
+  if (Array.isArray(stationCode)) {
+    const stations = data.map((stationData: StationData) => stationData.station.code)
+
+    stationCode.forEach((code: string | number, i: number) => {
+      if (code != stations[i]) {
+        throw new Error(`Station ${code} doesn't exist`)
+      }
+    })
+  } else {
+    if (data[0].station.code != stationCode) {
+      throw new Error(`Station ${stationCode} doesn't exist`)
+    }
+  }
+}
+
 export default {
-  checkParams
+  checkParams,
+  includesStationCode,
+  checkStationExists
 }

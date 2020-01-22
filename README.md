@@ -36,7 +36,7 @@ Gets and returns daily average data from a knmi station.
 Returns a Promise which resolves in an array of objects; one for each day.
 
 **stationCode**  
-*Number or string*  
+*Number or string or an array of numbers or strings*  
 The code of the station you want to get data from. Station codes can be found [here](http://projects.knmi.nl/klimatologie/metadata/index.html).
 
 **variables**  
@@ -143,31 +143,48 @@ Data will be returned in the following format:
 <summary>Data format</summary>
 
 ```json
-    "station": {
-      "name": "BERKHOUT",
-      "code": 249,
-      "coordinates": {
-        "lat": 52.644,
-        "lng": 4.979
-      },
-      "altitude": -2.4
-    },
-    "data": [
-      {
-        "STN": "249",
-        "YYYYMMDD": "20180101",
-        "DDVEC": "229",
-        "FHVEC": "63",
-        "FG": "67",
-        "FHX": "120",
-        "FHXH": "2",
-        "FHN": "20",
-        "FHNH": "17",
-        "FXX": "200",
-        "FXXH": "3"
-      }
-    ]
-  }
+[
+    {
+        "station": {
+            "name": "DE BILT",
+            "code": 260,
+            "coordinates": {
+                "lat": 52.1,
+                "lng": 5.18
+            },
+            "altitude": 1.9
+        },
+        "data": [
+            {
+                "STN": "260",
+                "YYYYMMDD": "20190114",
+                "HH": "1",
+                "DD": "310",
+                "FH": "60",
+                "FF": "70",
+                "FX": "130"
+            },
+            {
+                "STN": "260",
+                "YYYYMMDD": "20190115",
+                "HH": "1",
+                "DD": "240",
+                "FH": "30",
+                "FF": "30",
+                "FX": "50"
+            },
+            {
+                "STN": "260",
+                "YYYYMMDD": "20190116",
+                "HH": "1",
+                "DD": "230",
+                "FH": "60",
+                "FF": "60",
+                "FX": "110"
+            }
+        ]
+    }
+]
 ```
 </details>
 
@@ -252,30 +269,47 @@ Data will be returned in the following format:
 <summary>Data format</summary>
 
 ```json
-    "station": {
-      "name": "BERKHOUT",
-      "code": 249,
-      "coordinates": {
-        "lat": 52.644,
-        "lng": 4.979
-      },
-      "altitude": -2.4
-    },
-    "data": [
-      {
-        "STN": "249",
-        "YYYYMMDD": "20180101",
-        "DDVEC": "229",
-        "FHVEC": "63",
-        "FG": "67",
-        "FHX": "120",
-        "FHXH": "2",
-        "FHN": "20",
-        "FHNH": "17",
-        "FXX": "200",
-        "FXXH": "3"
-      }
-    ]
-  }
+[
+    {
+        "station": {
+            "name": "DE BILT",
+            "code": 260,
+            "coordinates": {
+                "lat": 52.1,
+                "lng": 5.18
+            },
+            "altitude": 1.9
+        },
+        "data": [
+            {
+                "STN": "260",
+                "YYYYMMDD": "20190114",
+                "HH": "1",
+                "DD": "310",
+                "FH": "60",
+                "FF": "70",
+                "FX": "130"
+            },
+            {
+                "STN": "260",
+                "YYYYMMDD": "20190115",
+                "HH": "1",
+                "DD": "240",
+                "FH": "30",
+                "FF": "30",
+                "FX": "50"
+            },
+            {
+                "STN": "260",
+                "YYYYMMDD": "20190116",
+                "HH": "1",
+                "DD": "230",
+                "FH": "60",
+                "FF": "60",
+                "FX": "110"
+            }
+        ]
+    }
+]
 ```
 </details>

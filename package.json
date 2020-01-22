@@ -11,6 +11,7 @@
     "prepublishOnly": "npm run build",
     "build": "tsc",
     "watch": "tsc -w",
+    "watch-test": "jest --watch",
     "test": "jest",
     "test-dev": "node test/dev-sandbox.js"
   },

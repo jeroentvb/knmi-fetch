@@ -5,10 +5,16 @@ import { DailyVarString, HourlyVarString, TimeSpan } from '../types'
  * @param stationCode string | number
  */
 function stationCode (stationCode: any): void {
-  if (
-    typeof stationCode !== 'string' && typeof stationCode !== 'number'
-  ) {
-    throw new TypeError('stationCode must be a string or a number')
+  if (Array.isArray(stationCode)) {
+    stationCode.forEach((code: any) => checkStationCode(code))
+  } else {
+    checkStationCode(stationCode)
+  }
+}
+
+function checkStationCode (stationCode: any): void {
+  if (typeof stationCode !== 'string' && typeof stationCode !== 'number') {
+    throw new TypeError(`stationCode (${stationCode}) must be a string or a number`)
   }
 }
 

@@ -10,12 +10,18 @@ describe('The check-types module', () => {
     expect(() => {
       typeCheck.stationCode(mockData.STATION_CODE)
       typeCheck.stationCode(mockData.STATION_CODE.toString())
+      typeCheck.stationCode([mockData.STATION_CODE, mockData.STATION_CODE])
+      typeCheck.stationCode([mockData.STATION_CODE.toString(), mockData.STATION_CODE.toString()])
     }).not.toThrow()
   })
 
   it('stationCode function should throw', () => {
     expect(() => {
       typeCheck.stationCode({ stationCode: 243 })
+    }).toThrow()
+
+    expect(() => {
+      typeCheck.stationCode([true, false])
     }).toThrow()
   })
 

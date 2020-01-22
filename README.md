@@ -135,6 +135,42 @@ Consider the following `timeSpan`:
 ```
 If `inSeason` is true, this will return data for every first of april between 2010 and 2019.
 
+**Data format**  
+Data will be returned in the following format:  
+
+<details>
+
+<summary>Data format</summary>
+
+```json
+    "station": {
+      "name": "BERKHOUT",
+      "code": 249,
+      "coordinates": {
+        "lat": 52.644,
+        "lng": 4.979
+      },
+      "altitude": -2.4
+    },
+    "data": [
+      {
+        "STN": "249",
+        "YYYYMMDD": "20180101",
+        "DDVEC": "229",
+        "FHVEC": "63",
+        "FG": "67",
+        "FHX": "120",
+        "FHXH": "2",
+        "FHN": "20",
+        "FHNH": "17",
+        "FXX": "200",
+        "FXXH": "3"
+      }
+    ]
+  }
+```
+</details>
+
 ### knmi.hours
 ```js
 knmi.hours(stationCode, variables, timeSpan, inSeason)
@@ -207,3 +243,39 @@ You need to pass in:
   end: '2019040112'
 }
 ```
+
+**Data format**  
+Data will be returned in the following format:  
+
+<details>
+
+<summary>Data format</summary>
+
+```json
+    "station": {
+      "name": "BERKHOUT",
+      "code": 249,
+      "coordinates": {
+        "lat": 52.644,
+        "lng": 4.979
+      },
+      "altitude": -2.4
+    },
+    "data": [
+      {
+        "STN": "249",
+        "YYYYMMDD": "20180101",
+        "DDVEC": "229",
+        "FHVEC": "63",
+        "FG": "67",
+        "FHX": "120",
+        "FHXH": "2",
+        "FHN": "20",
+        "FHNH": "17",
+        "FXX": "200",
+        "FXXH": "3"
+      }
+    ]
+  }
+```
+</details>

@@ -29,6 +29,7 @@
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {
+    "@types/jest": "^25.1.1",
     "@types/node": "^12.12.6",
     "@types/node-fetch": "^2.5.3",
     "jeroentvb-helper": "github:jeroentvb/jeroentvb-helper",

@@ -1,6 +1,8 @@
 const knmi = require('../dist/knmi-fetch')
 const helper = require('jeroentvb-helper')
 
+if (process.argv[2]) console.log(`Using station: ${process.argv[2]}`)
+
 function testDays () {
   knmi.days(process.argv[2] || [249, 260], 'ALL', {
     start: '19990114',

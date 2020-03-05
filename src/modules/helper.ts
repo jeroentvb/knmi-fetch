@@ -37,7 +37,8 @@ function includesStationCode (row: string, stationCode: StationCode): boolean {
       if (row.includes(code + ':')) includes = true
     })
   } else {
-    if (row.includes(stationCode + ':')) includes = true
+    if (stationCode === 'ALL' && row.includes(':  ')) includes = true
+    if (row.includes(stationCode + ':  ')) includes = true
   }
 
   return includes
@@ -49,6 +50,8 @@ function includesStationCode (row: string, stationCode: StationCode): boolean {
  * @param stationCode 
  */
 function checkStationExists (data: StationData[], stationCode: StationCode): void {
+  if (stationCode === 'ALL') return
+
   if (Array.isArray(stationCode)) {
     const stations = data.map((stationData: StationData) => stationData.station.code)
 

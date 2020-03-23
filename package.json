@@ -29,12 +29,12 @@
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {
-    "@types/jest": "^25.1.1",
-    "@types/node": "^12.12.6",
-    "@types/node-fetch": "^2.5.3",
+    "@types/jest": "^25.1.4",
+    "@types/node": "^12.12.30",
+    "@types/node-fetch": "^2.5.5",
     "jeroentvb-helper": "github:jeroentvb/jeroentvb-helper",
     "jest": "^24.9.0",
-    "typescript": "^3.7.2"
+    "typescript": "^3.8.3"
   },
   "keywords": [
     "knmi",

@@ -33,7 +33,7 @@
     "@types/node": "^12.12.30",
     "@types/node-fetch": "^2.5.5",
     "jeroentvb-helper": "github:jeroentvb/jeroentvb-helper",
-    "jest": "^24.9.0",
+    "jest": "^26.6.3",
     "typescript": "^3.8.3"
   },
   "keywords": [

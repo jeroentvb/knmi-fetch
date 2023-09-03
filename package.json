@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@types/jest": "^26.0.24",
-    "@types/node": "^15.14.9",
+    "@types/node": "^18.15.11",
     "@types/node-fetch": "^2.5.12",
     "jeroentvb-helper": "github:jeroentvb/jeroentvb-helper",
     "jest": "^27.3.1",

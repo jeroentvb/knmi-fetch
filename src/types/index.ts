@@ -55,11 +55,11 @@ export type DailyVarString =
 'UXH' |
 'UN' |
 'UNH' |
-'WIND'| 
+'WIND'|
 'TEMP'|
 'SUNR'|
 'PRCP'|
-'PRES'| 
+'PRES'|
 'VICL'|
 'MSTR'|
 'ALL'

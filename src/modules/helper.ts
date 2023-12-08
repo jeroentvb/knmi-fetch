@@ -1,6 +1,6 @@
-import typeCheck from './check-types'
-import { DAILY, HOURLY, DAILYVARS, HOURLYVARS } from '../constants'
-import { StationCode, StationData } from '../types'
+import typeCheck from './check-types';
+import { DAILY, HOURLY, DAILYVARS, HOURLYVARS } from '../constants';
+import { StationCode, StationData } from '../types';
 
 /**
  * Check if the params are in the correct format
@@ -8,19 +8,19 @@ import { StationCode, StationData } from '../types'
  * @param variableType
  */
 function checkParams(
-  params: {
-    stationCode: any,
+   params: {
+    stationCode: unknown,
     variables?: any,
     timeSpan?: any,
-    inSeason?: any
+    inSeason?: unknown
   },
-  variableType: 'daily' | 'hourly',
+   variableType: 'daily' | 'hourly',
 ): void {
-  typeCheck.stationCode(params.stationCode)
-  if (params.variables && variableType === DAILY) typeCheck.vars(params.variables, DAILYVARS)
-  if (params.variables && variableType === HOURLY) typeCheck.vars(params.variables, HOURLYVARS)
-  if (params.timeSpan) typeCheck.timeSpan(params.timeSpan)
-  if (params.inSeason) typeCheck.inSeason(params.inSeason, params.timeSpan)
+   typeCheck.stationCode(params.stationCode);
+   if (params.variables && variableType === DAILY) typeCheck.vars(params.variables, DAILYVARS);
+   if (params.variables && variableType === HOURLY) typeCheck.vars(params.variables, HOURLYVARS);
+   if (params.timeSpan) typeCheck.timeSpan(params.timeSpan);
+   if (params.inSeason) typeCheck.inSeason(params.inSeason, params.timeSpan);
 }
 
 /**
@@ -29,19 +29,19 @@ function checkParams(
  * @param stationCode 
  * @returns boolean
  */
-function includesStationCode (row: string, stationCode: StationCode): boolean {
-  let includes = false
-  
-  if (Array.isArray(stationCode)) {
-    stationCode.forEach((code: string | number) => {
-      if (row.includes(code + ':')) includes = true
-    })
-  } else {
-    if (stationCode === 'ALL' && row.includes(':  ')) includes = true
-    if (row.includes(stationCode + ':  ')) includes = true
-  }
+function includesStationCode(row: string, stationCode: StationCode): boolean {
+   let includes = false;
 
-  return includes
+   if (Array.isArray(stationCode)) {
+      stationCode.forEach((code: string | number) => {
+         if (row.includes(code + ':')) includes = true;
+      });
+   } else {
+      if (stationCode === 'ALL' && row.includes(':  ')) includes = true;
+      if (row.includes(stationCode + ':  ')) includes = true;
+   }
+
+   return includes;
 }
 
 /**
@@ -49,26 +49,26 @@ function includesStationCode (row: string, stationCode: StationCode): boolean {
  * @param data 
  * @param stationCode 
  */
-function checkStationExists (data: StationData[], stationCode: StationCode): void {
-  if (stationCode === 'ALL') return
+function checkStationExists(data: StationData[], stationCode: StationCode): void {
+   if (stationCode === 'ALL') return;
 
-  if (Array.isArray(stationCode)) {
-    const stations = data.map((stationData: StationData) => stationData.station.code)
+   if (Array.isArray(stationCode)) {
+      const stations = data.map((stationData: StationData) => stationData.station.code);
 
-    stationCode.forEach((code: string | number, i: number) => {
-      if (code != stations[i]) {
-        throw new Error(`Station ${code} doesn't exist`)
+      stationCode.forEach((code: string | number, i: number) => {
+         if (code != stations[i]) {
+            throw new Error(`Station ${code} doesn't exist`);
+         }
+      });
+   } else {
+      if (data[0].station.code != stationCode) {
+         throw new Error(`Station ${stationCode} doesn't exist`);
       }
-    })
-  } else {
-    if (data[0].station.code != stationCode) {
-      throw new Error(`Station ${stationCode} doesn't exist`)
-    }
-  }
+   }
 }
 
 export default {
-  checkParams,
-  includesStationCode,
-  checkStationExists
-}
+   checkParams,
+   includesStationCode,
+   checkStationExists
+};

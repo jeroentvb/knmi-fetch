@@ -1,6 +1,6 @@
-import helper from './helper';
+import helper from './helper.js';
 
-import { StationData, StationCode } from '../types';
+import { StationData, StationCode } from '../types/index.js';
 
 /**
  * Takes the knmi station data (txt) and parses it to usable json
@@ -8,6 +8,7 @@ import { StationData, StationCode } from '../types';
  * @returns object[]
  */
 function data(data: string, stationCode: StationCode): StationData[] {
+   console.log('data', data);
    let legend: string[];
    const stationInfo: StationData['station'][] = [];
    const stationData: StationData[] = [];
@@ -41,6 +42,8 @@ function data(data: string, stationCode: StationCode): StationData[] {
    // Return the array of values as a usable object
       .map((values: string[]) => {
          const data: { [key: string]: string } = {};
+
+         console.log(legend);
 
          legend.forEach((item: string, i: number) => {
             data[item] = values[i];

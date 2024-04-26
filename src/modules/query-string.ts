@@ -1,5 +1,4 @@
-import { DailyVars, TimeSpan, HourlyVars, StationCode } from '../types';
-import { BodyInit } from 'node-fetch';
+import { DailyVars, TimeSpan, HourlyVars, StationCode } from '../types/index.js';
 
 /**
  * Pass in all the parameters and return the query as a string.

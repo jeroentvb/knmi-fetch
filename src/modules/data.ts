@@ -1,10 +1,8 @@
-import fetch, { RequestInit } from 'node-fetch';
+import queryString from './query-string.js';
+import parser from './parser.js';
+import helper from './helper.js';
 
-import queryString from './query-string';
-import parser from './parser';
-import helper from './helper';
-
-import { HourlyVars, DailyVars, TimeSpan, StationCode } from '../types';
+import { HourlyVars, DailyVars, TimeSpan, StationCode } from '../types/index.js';
 
 /**
  * get and parse the knmi data

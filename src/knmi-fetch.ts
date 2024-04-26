@@ -1,9 +1,9 @@
-import data from './modules/data';
-import helper from './modules/helper';
+import data from './modules/data.js';
+import helper from './modules/helper.js';
 
-import { API_URL_DAYS, API_URL_HOURS, HOURLY, DAILY } from './constants';
+import { API_URL_DAYS, API_URL_HOURS, HOURLY, DAILY } from './constants/index.js';
 
-import { DailyVars, TimeSpan, HourlyVars, StationData, StationCode } from './types';
+import { DailyVars, TimeSpan, HourlyVars, StationData, StationCode } from './types/index.js';
 
 /**
  * Fetches and parses the daily climatology data from a station from the KNMI

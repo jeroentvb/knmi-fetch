@@ -1,4 +1,4 @@
-import { DailyVarString, HourlyVarString } from '../types';
+import { DailyVarString, HourlyVarString } from '../types/index.js';
 
 export const API_URL_DAYS = 'http://projects.knmi.nl/klimatologie/daggegevens/getdata_dag.cgi';
 

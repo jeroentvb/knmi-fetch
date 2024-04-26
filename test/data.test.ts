@@ -1,17 +1,17 @@
 /* global describe, it, expect, jest */
 
-const data = require('../dist/modules/data').default
+import data from '../dist/modules/data'
 
 jest.mock('node-fetch')
-const fetch = require('node-fetch')
+import fetch from 'node-fetch')
 const { Response } = jest.requireActual('node-fetch')
 
-const queryString = require('../dist/modules/query-string').default
-const parser = require('../dist/modules/parser').default
-const helper = require('../dist/modules/helper').default
+import queryString from '../dist/modules/query-string'
+import parser from '../dist/modules/parser'
+import helper from '../dist/modules/helper'
 
-const mockData = require('./mock-data')
-const constants = require('../dist/constants')
+import mockData from './mock-data'
+import constants from '../dist/constants'
 
 describe('The data module', () => {
   it('should call the queryString.create function', async () => {

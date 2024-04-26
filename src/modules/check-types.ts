@@ -1,4 +1,4 @@
-import { DailyVarString, HourlyVarString, TimeSpan } from '../types';
+import { DailyVarString, HourlyVarString, TimeSpan } from '../types/index.js';
 
 /**
  * Check if the stationCode is a string or number, if not throw a TypeError

@@ -1,6 +1,6 @@
-import typeCheck from './check-types';
-import { DAILY, HOURLY, DAILYVARS, HOURLYVARS } from '../constants';
-import { StationCode, StationData } from '../types';
+import typeCheck from './check-types.js';
+import { DAILY, HOURLY, DAILYVARS, HOURLYVARS } from '../constants/index.js';
+import { StationCode, StationData } from '../types/index.js';
 
 /**
  * Check if the params are in the correct format

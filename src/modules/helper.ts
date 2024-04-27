@@ -34,11 +34,12 @@ function includesStationCode(row: string, stationCode: StationCode): boolean {
 
    if (Array.isArray(stationCode)) {
       stationCode.forEach((code: string | number) => {
-         if (row.includes(code + ':')) includes = true;
+         if (row.includes(code.toString())) includes = true;
       });
    } else {
-      if (stationCode === 'ALL' && row.includes(':  ')) includes = true;
-      if (row.includes(stationCode + ':  ')) includes = true;
+      const potentialStationCode = parseInt(row.split(' ')[1]);
+      if (stationCode === 'ALL' && !isNaN(potentialStationCode)) includes = true;
+      if (row.includes(stationCode.toString())) includes = true;
    }
 
    return includes;

@@ -1,8 +1,8 @@
 import { DailyVarString, HourlyVarString } from '../types';
 
-export const API_URL_DAYS = 'http://projects.knmi.nl/klimatologie/daggegevens/getdata_dag.cgi';
+export const API_URL_DAYS = 'https://www.daggegevens.knmi.nl/klimatologie/daggegevens';
 
-export const API_URL_HOURS = 'http://projects.knmi.nl/klimatologie/uurgegevens/getdata_uur.cgi';
+export const API_URL_HOURS = 'https://www.daggegevens.knmi.nl/klimatologie/uurgegevens';
 
 export const DAILY = 'daily';
 export const HOURLY = 'hourly';

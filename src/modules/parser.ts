@@ -1,6 +1,6 @@
 import helper from './helper';
 
-import { StationData, StationCode } from '../types';
+import { StationCode, StationData } from '../types';
 
 /**
  * Takes the knmi station data (txt) and parses it to usable json
@@ -8,37 +8,23 @@ import { StationData, StationCode } from '../types';
  * @returns object[]
  */
 function data(data: string, stationCode: StationCode): StationData[] {
-   let legend: string[];
-   const stationInfo: StationData['station'][] = [];
-   const stationData: StationData[] = [];
+   const splitData = data.split('\n');
+   const legend = getLegend(splitData);
+   const stationInfo: StationData['station'][] = getStations(splitData, stationCode);
 
    const dataArray: StationData['data'] = data
-   // Split string at newline characters
+      // Split string at newline characters
       .split('\n')
-   // Remove all comments from the data.
-   // Get the legend and station info
-      .filter((row: string) => {
-      // Get the legend
-         if (row.includes('# STN,YYYYMMDD')) {
-            legend = parseLegend(row);
-         }
-
-         // Get the station info
-         if (row.includes('#') && helper.includesStationCode(row, stationCode)) {
-            const stationString = row.split(' ').filter(item => item);
-
-            stationInfo.push(createStationObject(stationString));
-         }
-
-         return !row.includes('#') && row !== '';
-      })
-   // Create an array from the data string and remove spaces
+      // Remove all comments from the data.
+      // Get the legend and station info
+      .filter((row: string) => !row.includes('#') && row !== '')
+      // Create an array from the data string and remove spaces
       .map((row: string) => {
          return row
             .split(',')
             .map((item: string) => item.trim());
       })
-   // Return the array of values as a usable object
+      // Return the array of values as a usable object
       .map((values: string[]) => {
          const data: { [key: string]: string } = {};
 
@@ -49,8 +35,8 @@ function data(data: string, stationCode: StationCode): StationData[] {
          return data;
       });
 
-   stationInfo.forEach((station: StationData['station'], i: number) => {
-      stationData[i] = {
+   const stationData: StationData[] = stationInfo.map((station: StationData['station']) => {
+      return {
          station,
          data: dataArray.filter(dataObj => dataObj.STN == station.code)
       };
@@ -59,9 +45,34 @@ function data(data: string, stationCode: StationCode): StationData[] {
    return stationData;
 }
 
+function getLegend(data: string[]) {
+   const legendRow = data.find(row => row.includes('# STN,YYYYMMDD')) as string;
+   return parseLegend(legendRow);
+}
+
+function getStations(data: string[], stationCode: StationCode): StationData['station'][] {
+   let isStationRow = false;
+   const stationRows: string[] = [];
+
+   for (const row of data) {
+      if (row.includes('STN') && row.includes('NAME')) {
+         isStationRow = true;
+      } else if (row.includes('# YYYYMMDD') || row.includes('# STN,YYYYMMDD')) {
+         break;
+      } else if (isStationRow && helper.includesStationCode(row, stationCode)) {
+         stationRows.push(row);
+      }
+   }
+
+   return stationRows.map(row => {
+      const stationString = row.split(' ').filter(Boolean);
+      return createStationObject(stationString);
+   });
+}
+
 /**
  * Parse the string that contains variable names to an array of variable names.
- * @param legend
+ * @param legend - # STN,YYYYMMDD,   HH,   DD,   FH,   FF,   FX
  * @returns string[]
  */
 function parseLegend(legend: string): string[] {
@@ -73,19 +84,18 @@ function parseLegend(legend: string): string[] {
 
 /**
  * Return a station info object
- * @param str 
- * @param stationCode
+ * @param str - [ '#', '209', '4.518', '52.465', '0.00', 'IJmond' ]
  * @returns Data['station']
  */
 function createStationObject(str: string[]): StationData['station'] {
    const stationName = str
-      .filter((item: string, i) => i > 4)
+      .slice(5)
       .map((item: string) => item.split('\r')[0])
       .join(' ');
 
    return {
       name: stationName,
-      code: parseInt(str[1].replace(':', '')),
+      code: parseInt(str[1]),
       coordinates: {
          lat: parseFloat(str[3]),
          lng: parseFloat(str[2]),

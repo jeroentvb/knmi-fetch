@@ -1,5 +1,3 @@
-import fetch, { RequestInit } from 'node-fetch';
-
 import queryString from './query-string';
 import parser from './parser';
 import helper from './helper';
@@ -8,8 +6,8 @@ import { HourlyVars, DailyVars, TimeSpan, StationCode } from '../types';
 
 /**
  * get and parse the knmi data
- * @param url 
- * @param params 
+ * @param url
+ * @param params
  */
 async function get(
    url: string,

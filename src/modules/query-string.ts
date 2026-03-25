@@ -1,5 +1,4 @@
 import { DailyVars, TimeSpan, HourlyVars, StationCode } from '../types';
-import { BodyInit } from 'node-fetch';
 
 /**
  * Pass in all the parameters and return the query as a string.
@@ -37,7 +36,7 @@ function parseStationCode(stationCode: StationCode): string | number {
  * Parse the vars to usable params.
  * Returns 'ALL' if there are no vars.
  * Joins the array of vars, or returns the vars variable.
- * @param vars 
+ * @param vars
  * @returns string
  */
 function parseVars(vars: DailyVars | HourlyVars | undefined): string {
